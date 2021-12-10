@@ -15,6 +15,7 @@ router.use(express.Router());
 router.get("", async (req, res, next)=>{
     try{
         const array = await modelResources.getAll();
+        res.status(200).json(array);
     }catch(err){
         next(err);
     }
