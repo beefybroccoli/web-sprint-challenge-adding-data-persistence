@@ -28,7 +28,7 @@ router.post("", verifyNewProject, async (req, res, next)=>{
         const newProjectId = await modelProjects.insert(req.newProject);
         const array = await modelProjects.get(newProjectId[0]);
         transformArray(array, req, res, next);
-        res.status(201).json(req.transformedArray);
+        res.status(201).json(req.transformedArray[0]);
     }catch(err){
         next(err)
     }

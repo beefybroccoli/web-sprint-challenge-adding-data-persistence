@@ -1,15 +1,15 @@
 
 exports.up = function(knex) {
     return knex.schema
-        .createTable('project', (table)=>{
+        .createTable('projects', (table)=>{
             table.increments('project_id');
             table.string('project_name').notNullable();
             table.string('project_description');
-            table.boolean('project_completed').notNullable();
+            table.boolean('project_completed');
         })
 };
 
 exports.down = function(knex) {
     return knex.schema
-        .dropTableIfExists('project') ;
+        .dropTableIfExists('projects') ;
 };
