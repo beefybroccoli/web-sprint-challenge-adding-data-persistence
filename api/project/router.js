@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express();
 const modelProjects = require("./model");
-const {verifyNewProject} = require("./middleware");
+const {verifyNewProject, transformArray} = require("./middleware");
 const {errorHandler}=require("../errorHandler");
 router.use(express.json());
 router.use(express.Router());
@@ -12,8 +12,9 @@ router.use(express.Router());
 //   - Example of response body: `[{"project_id":1,"project_name":"bar","project_description":null,"project_completed":false}]`
 router.get("", async (req, res, next)=>{
     try{
-        const projects = await modelProjects.getAll();
-        res.status(200).json(projects);
+        const array = await modelProjects.getAll();
+        transformArray(array, req, res, next);
+        res.status(200).json(req.transformedArray);
     }catch(err){
         next(err);
     }
@@ -25,8 +26,9 @@ router.get("", async (req, res, next)=>{
 router.post("", verifyNewProject, async (req, res, next)=>{
     try{
         const newProjectId = await modelProjects.insert(req.newProject);
-        const newProject = await modelProjects.get(newProjectId[0]);
-        res.status(201).json(newProject);
+        const array = await modelProjects.get(newProjectId[0]);
+        transformArray(array, req, res, next);
+        res.status(201).json(req.transformedArray);
     }catch(err){
         next(err)
     }

@@ -12,4 +12,11 @@ function verifyNewProject(req, res, next) {
     }
 }
 
-module.exports={verifyNewProject};
+function transformArray(array, req, res, next){
+    req.transformedArray =  array.map(element=>{
+        return {...element, project_completed : (element.project_completed === 1 ? true : false)}
+    });
+    next();
+}
+
+module.exports={verifyNewProject, transformArray};
