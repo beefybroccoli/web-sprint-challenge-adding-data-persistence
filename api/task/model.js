@@ -1,7 +1,8 @@
 const db = require("../../data/dbConfig");
 
 async function getAll(){
-    return await db('tasks');
+    return await db('tasks as t')
+        .leftJoin('users as u', 'u.user_id', 't.task_id');
 }
 
 async function get(task_id){
