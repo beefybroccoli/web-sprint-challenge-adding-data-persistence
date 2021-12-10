@@ -1,9 +1,6 @@
-
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
   return knex('projects').truncate()
     .then(function () {
-      // Inserts seed entries
       return knex('projects').insert([
         {project_id:1, project_name:'project_1', project_description:"description 1", project_completed:false},
         {project_id:2, project_name:'project_2', project_description:"description 2", project_completed:false},
