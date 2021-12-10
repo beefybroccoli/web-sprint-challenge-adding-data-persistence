@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express();
-const {errorHandler}=require("../errorHandler");
 const modelTasks = require("./model");
 const {verifyNewTask, transformArray, verifyProjectId} = require("./middleware");
 
-router.use(express.json());
 router.use(express.Router());
 
 router.get("", async (req, res, next)=>{
@@ -33,7 +31,5 @@ router.post("", verifyNewTask, verifyProjectId, async (req, res, next)=>{
         next(err);
     }
 })
-
-router.use(errorHandler);
 
 module.exports = router;

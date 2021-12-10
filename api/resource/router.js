@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express();
-const {errorHandler}=require("../errorHandler");
 const modelResources = require("./model");
 const {verifyNewResource} = require("./middleware");
 
-router.use(express.json());
 router.use(express.Router());
 
 router.get("", async (req, res, next)=>{
@@ -27,9 +25,4 @@ router.post("", verifyNewResource, async (req, res, next)=>{
     }
 })
 
-router.use(errorHandler);
-
 module.exports = router;
-
-
-

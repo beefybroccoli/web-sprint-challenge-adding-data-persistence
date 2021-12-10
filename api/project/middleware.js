@@ -1,5 +1,5 @@
 function verifyNewProject(req, res, next) {
-    if('project_name' in req.body === false || typeof req.body.project_name !== 'string' || req.body.project_name === ""){
+    if('project_name' in req.body === false || typeof req.body.project_name !== 'string' || req.body.project_name.trim() === ""){
         res.status(400).json({message:`invalid project_name`})
     }else{
         const newProject = {
