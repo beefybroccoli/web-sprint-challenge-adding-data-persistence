@@ -8,10 +8,6 @@ const {verifyNewResource} = require("./middleware");
 router.use(express.json());
 router.use(express.Router());
 
-
-
-// - [ ] `[GET] /api/resources`
-//   - Example of response body: `[{"resource_id":1,"resource_name":"foo","resource_description":null}]`
 router.get("", async (req, res, next)=>{
     try{
         const array = await modelResources.getAll();
@@ -21,8 +17,6 @@ router.get("", async (req, res, next)=>{
     }
 })
 
-// - [ ] `[POST] /api/resources`
-//   - Example of response body: `{"resource_id":1,"resource_name":"foo","resource_description":null}`
 router.post("", verifyNewResource, async (req, res, next)=>{
     try{
         const {resource_name, resource_description} = req.body;
