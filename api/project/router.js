@@ -3,6 +3,7 @@ const router = express();
 const modelProjects = require("./model");
 const {verifyNewProject, transformArray} = require("./middleware");
 const {errorHandler}=require("../errorHandler");
+
 router.use(express.json());
 router.use(express.Router());
 
@@ -30,6 +31,3 @@ router.post("", verifyNewProject, async (req, res, next)=>{
 router.use(errorHandler);
 
 module.exports = router;
-
-
-
