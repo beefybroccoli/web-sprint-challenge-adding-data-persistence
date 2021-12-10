@@ -26,8 +26,4 @@ router.post("", verifyNewProject, async (req, res, next)=>{
     }
 })
 
-router.use((req, res) =>{
-    res.status(404).json({message:`invalid path ${req.path}`});
-})
-
 module.exports = router;
