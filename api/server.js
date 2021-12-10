@@ -15,7 +15,7 @@ server.use("/api/projects", routerProjects);
 server.use("/api/resources", routerResources);
 server.use("/api/tasks", routerTasks);
 
-// server.use("*", (req, res) =>{
+// server.get("*", (req, res) =>{
 //     res.status(404).json({message:`invalid path ${req.path}`});
 // })
 
