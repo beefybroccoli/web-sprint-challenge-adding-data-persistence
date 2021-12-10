@@ -1,19 +1,39 @@
 // build your `/api/resources` router here
 const express = require('express');
 const router = express();
+const {errorHandler}=require("../errorHandler");
+const modelResources = require("./model");
+const {verifyNewResource} = require("./middleware");
+
 router.use(express.json());
+router.use(express.Router());
+
+
 
 // - [ ] `[GET] /api/resources`
 //   - Example of response body: `[{"resource_id":1,"resource_name":"foo","resource_description":null}]`
-router.get("", async (req, res)=>{
-    res.status(503).json({message:"GET /api/resources not ready yet"});
+router.get("", async (req, res, next)=>{
+    try{
+        const array = await modelResources.getAll();
+    }catch(err){
+        next(err);
+    }
 })
 
 // - [ ] `[POST] /api/resources`
 //   - Example of response body: `{"resource_id":1,"resource_name":"foo","resource_description":null}`
-router.post("", async (req, res)=>{
-    res.status(503).json({message:"POST /api/resources not ready yet"});
+router.post("", verifyNewResource, async (req, res, next)=>{
+    try{
+        const {resource_name, resource_description} = req.body;
+        const newResourceId = await modelResources.insert({resource_name, resource_description : resource_description || null});
+        const newResource = await modelResources.get(newResourceId[0]);
+        res.status(201).json(newResource[0]);
+    }catch(err){
+        next(err)
+    }
 })
+
+router.use(errorHandler);
 
 module.exports = router;
 
