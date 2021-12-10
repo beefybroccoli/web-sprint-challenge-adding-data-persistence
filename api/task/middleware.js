@@ -19,7 +19,7 @@ function verifyNewTask(req, res, next){
     }else if (typeof req.body.task_description !== 'string' || req.body.task_description.trim() === ''){
         errorMessage = "invalid task description, non empty string"
     }else if ('task_notes' in req.body){
-        if(typeof req.body.task_notes !== string || req.body.task_notes.trim() === ""){
+        if(typeof req.body.task_notes !== 'string' || req.body.task_notes.trim() === ""){
             errorMessage = "invalid task_notes, non empty string";
         }
     }else if ('task_completed' in req.body){
