@@ -9,7 +9,7 @@ async function get(project_id){
 }
 
 async function insert(project){
-    return await db('project');
+    return await db('project').insert(project);
 }
 
 module.exports = {getAll, get, insert };
